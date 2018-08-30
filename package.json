@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@terrestris/react-geo": "^9.0.0",
+    "@terrestris/react-geo": "^8.12.1",
     "antd": "^3.8.4",
     "ol": "^4.6.5",
     "react": "^16.4.2",
