@@ -9,6 +9,7 @@ import OlMap from 'ol/map';
 import OlView from 'ol/view';
 import OlLayerTile from 'ol/layer/tile';
 import OlSourceOsm from 'ol/source/osm';
+import OlProjection from 'ol/proj';
 
 import { MapComponent } from '@terrestris/react-geo';
 
@@ -16,12 +17,13 @@ const layer = new OlLayerTile({
   source: new OlSourceOsm()
 });
 
-const center = [ 788453.4890155146, 6573085.729161344 ];
+// const center = [ 788453.4890155146, 6573085.729161344 ];
+const center = [ 95.3160473, 5.5477057 ];
 
 // create a new instance of ol.map in ES6 syntax
 const map = new OlMap({
   view: new OlView({
-    center: center,
+    center: OlProjection.fromLonLat(center),
     zoom: 16,
   }),
   layers: [layer]
@@ -40,4 +42,4 @@ class Map extends Component {
   }
 }
 
-export {Map};
+export { Map };
