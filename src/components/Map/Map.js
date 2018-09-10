@@ -11,7 +11,6 @@ import OlSourceOsm from 'ol/source/osm';
 import OlProjection from 'ol/proj';
 
 import { MapComponent } from '@terrestris/react-geo';
-import { SiderMap } from './SiderMap';
 import { Layout } from 'antd';
 
 import './Map.css';
