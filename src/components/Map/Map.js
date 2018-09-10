@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import 'ol/ol.css';
-import './Map.css';
 
 import 'antd/dist/antd.css';
 import '../../react-geo.css';
@@ -12,6 +11,10 @@ import OlSourceOsm from 'ol/source/osm';
 import OlProjection from 'ol/proj';
 
 import { MapComponent } from '@terrestris/react-geo';
+import { SiderMap } from './SiderMap';
+import { Layout } from 'antd';
+
+import './Map.css';
 
 const layer = new OlLayerTile({
   source: new OlSourceOsm()
@@ -33,11 +36,11 @@ const map = new OlMap({
 class Map extends Component {
   render() {
     return (
-      <div>
+      <Layout>
         <MapComponent 
           map={map}
         />
-      </div>
+      </Layout>
     );
   }
 }

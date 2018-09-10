@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import { Layout } from 'antd';
 import Navigation from '../components/Navigation';
-import {Map} from '../components/Map/Map.js';
+import MapPage from '../components/Map';
 
 import {
   SimpleButton
@@ -13,14 +14,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navigation />
-        <p className="App-intro">
-          <SimpleButton
-            onClick={() => {alert('Hello World!');}}
-          >
-            Hello world!
-          </SimpleButton>
-        </p>
-        <Map />
+        <MapPage />
       </div>
     );
   }
