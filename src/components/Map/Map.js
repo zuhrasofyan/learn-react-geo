@@ -19,6 +19,11 @@ import { Layout } from 'antd';
 
 import './Map.css';
 
+const layerBase = new OlLayerTile({
+  name: 'OSM',
+  source: new OlSourceOsm()
+});
+
 const layerGroup = new OlLayerGroup({
   name: 'Layergroup',
   layers: [
@@ -51,35 +56,60 @@ const layerKecamatan = new OlLayerTile({
     serverType: 'geoserver',
     transition: 0
   }),
-  opacity: 0.5
+  opacity: 0.5,
+  visible: true
 });
+
 
 // const center = [ 788453.4890155146, 6573085.729161344 ];
 const center = [ 95.3160473, 5.5477057 ];
 
 // create a new instance of ol.map in ES6 syntax
 const map = new OlMap({
+  test: 0,
   view: new OlView({
     center: OlProjection.fromLonLat(center),
     zoom: 16,
   }),
   layers: [
-    new OlLayerTile({
-      name: 'OSM',
-      source: new OlSourceOsm()
-    }),
+    layerBase,
     layerGroup,
     layerKecamatan
   ]
 });
 
 class Map extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleChange = this.handleChange.bind(this);
+
+    this.state = {
+      layerKecamatan: layerKecamatan,
+      map: map
+    }
+  }
+
+  handleChange(event) {
+    console.log(this.state.layerKecamatan);
+    let layerKecamatan = Object.assign({}, this.state.layerKecamatan);
+    layerKecamatan.values_.visible = !layerKecamatan.values_.visible;
+    this.setState({layerKecamatan});
+    console.log(this.state.layerKecamatan); 
+  }
+
   render() {
     return (
       <Layout>
         <MapComponent 
-          map={map}
+          map={this.state.map}
         />
+        <button
+          onClick={this.handleChange}
+          type="button"
+        >
+          Click Me
+        </button>
       </Layout>
     );
   }
