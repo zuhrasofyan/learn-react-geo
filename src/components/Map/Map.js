@@ -78,6 +78,9 @@ const map = new OlMap({
   ]
 });
 
+// list all layer const in an array so it can be mapped when rendered
+const layerList = [layerBase, layerGroup, layerKecamatan]
+
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -86,16 +89,15 @@ class Map extends Component {
 
     this.state = {
       layerKecamatan: layerKecamatan,
+      layerGroup: layerGroup,
       map: map
     }
   }
 
-  handleChange(event) {
-    console.log(this.state.layerKecamatan);
-    let layerKecamatan = Object.assign({}, this.state.layerKecamatan);
-    layerKecamatan.values_.visible = !layerKecamatan.values_.visible;
-    this.setState({layerKecamatan});
-    console.log(this.state.layerKecamatan); 
+  handleChange(layer) {
+    let layerK = Object.assign({}, layer);
+    layerK.values_.visible = !layerK.values_.visible;
+    this.setState({layer: layerK})
   }
 
   render() {
@@ -104,12 +106,16 @@ class Map extends Component {
         <MapComponent 
           map={this.state.map}
         />
-        <button
-          onClick={this.handleChange}
-          type="button"
-        >
-          Click Me
-        </button>
+        {layerList.map(i => {
+          return (
+            <button
+              key={i.values_.name}
+              onClick={() => this.handleChange(i)}
+            >
+              {i.values_.name}
+            </button>
+          )
+        } )}
       </Layout>
     );
   }
